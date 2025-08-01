@@ -4,7 +4,7 @@ import requests
 # Get country name from user
 country = input("Enter a country: ")
 
-#This is the weather API
+#This is the Country API
 url = f"https://restcountries.com/v3.1/name/{country}"
 
 #Make the GET request
