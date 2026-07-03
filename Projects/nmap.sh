@@ -61,7 +61,7 @@ echo "$LIVE_HOSTS" > "$HOSTS_FILE"
 # PHASE 1a: TCP Quick Scan (all ports)
 # ============================================
 echo -e "${YELLOW}[*] Phase 1a: TCP Quick Scan — all 65535 ports${NC}"
-nmap -sS -p- --min-rate 5000 --open -iL "$HOSTS_FILE" \
+sudo nmap -sS -p- --min-rate 5000 --open -iL "$HOSTS_FILE" \
     -oG "$RESULTS_DIR/tcp_quick.gnmap" \
     -oN "$RESULTS_DIR/tcp_quick.nmap" 2>/dev/null
 
@@ -82,7 +82,7 @@ else
     # PHASE 2a: TCP Deep Scan (version + vuln)
     # ============================================
     echo -e "${YELLOW}[*] Phase 2a: TCP Deep Scan — version detection + vuln scripts${NC}"
-    nmap -sCV -p "$TCP_PORTS" --script vuln -iL "$HOSTS_FILE" \
+    sudo nmap -sCV -p "$TCP_PORTS" --script vuln -iL "$HOSTS_FILE" \
         -oN "$RESULTS_DIR/tcp_deep.nmap" \
         -oX "$RESULTS_DIR/tcp_deep.xml" 2>/dev/null
 
@@ -95,7 +95,7 @@ echo ""
 # PHASE 1b: UDP Quick Scan (top 1000)
 # ============================================
 echo -e "${YELLOW}[*] Phase 1b: UDP Quick Scan — top 1000 ports${NC}"
-nmap -sU --top-ports 1000 --min-rate 5000 --open -iL "$HOSTS_FILE" \
+sudo nmap -sU --top-ports 1000 --min-rate 5000 --open -iL "$HOSTS_FILE" \
     -oG "$RESULTS_DIR/udp_quick.gnmap" \
     -oN "$RESULTS_DIR/udp_quick.nmap" 2>/dev/null
 
@@ -116,7 +116,7 @@ else
     # PHASE 2b: UDP Deep Scan (version + vuln)
     # ============================================
     echo -e "${YELLOW}[*] Phase 2b: UDP Deep Scan — version detection + vuln scripts${NC}"
-    nmap -sUCV -p "$UDP_PORTS" --script vuln -iL "$HOSTS_FILE" \
+    sudo nmap -sUCV -p "$UDP_PORTS" --script vuln -iL "$HOSTS_FILE" \
         -oN "$RESULTS_DIR/udp_deep.nmap" \
         -oX "$RESULTS_DIR/udp_deep.xml" 2>/dev/null
 
